@@ -1,0 +1,20 @@
+{% extends "inventory/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Search Item</h1>
+    <form method="get" action="{% url 'search_item' %}">
+        <input type="text" name="barcode" placeholder="Enter barcode" required>
+        <button type="submit">Search</button>
+    </form>
+    {% if item %}
+        <h2>Item Found</h2>
+        <p><strong>Barcode:</strong> {{ item.barcode }}</p>
+        <p><strong>Name:</strong> {{ item.name }}</p>
+        <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+        <a href="{% url 'update_item' %}?barcode={{ item.barcode }}">Edit Quantity</a>
+    {% elif barcode %}
+        <p>No item found with barcode {{ barcode }}</p>
+    {% endif %}
+
+{% endblock content %}

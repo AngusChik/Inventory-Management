@@ -1,0 +1,15 @@
+{% extends "inventory/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Update Item</h1>
+    <form method="post" action="{% url 'update_item' %}">
+        {% csrf_token %}
+        <input type="hidden" name="barcode" value="{{ item.barcode }}">
+        {{ form.as_p }}
+        <label for="quantity_change">Quantity to Add or Delete:</label>
+        <input type="number" id="quantity_change" name="quantity_change" min="0" value="0" required>
+        <button type="submit" name="action" value="add">Add Quantity</button>
+        <button type="submit" name="action" value="delete">Delete Quantity</button>
+    </form>
+{% endblock content %}
